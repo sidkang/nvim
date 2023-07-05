@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "prefix": ["setup", "template"],
+    "body": [
+      "<template>",
+      "\t$1",
+      "</template>",
+      "",
+      "<script lang=\"ts\" setup>",
+      "\t$2",
+      "</script>",
+      "",
+      "<style lang=\"sass\">",
+      "\t$3",
+      "</style>",
+      ""
+    ],
+    "description": "My standard setup Vue3 + TS"
+  },
+  "ggjt": {
+    "prefix": ["ggjt"],
+    "body": [
+      "${1:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE} * \"公共交通\" \"${2|下班 公交,下班 地铁,上班 公交,上班 地铁|}\" $3",
+      "\ttime: \"${4:$CURRENT_HOUR:$CURRENT_MINUTE}\"",
+      "\tExpenses:Transport:PublicTransit \t\t\t ${6:5.00} CNY",
+      "\t$0"
+    ],
+    "description": "公共交通"
+  }
+}
