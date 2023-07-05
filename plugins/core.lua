@@ -2,6 +2,7 @@ return {
   -- customize alpha options
   {
     "goolord/alpha-nvim",
+    enabled = false,
     opts = function(_, opts)
       -- customize the dashboard header
       opts.section.header.val = {
@@ -62,16 +63,36 @@ return {
   --     )
   --   end,
   -- },
+  {
+    "Comment.nvim",
+    config = function()
+      require("Comment").setup()
+      require("Comment.ft").set("beancount", ";%s")
+    end,
+  },
   -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-  -- {
-  --   "folke/which-key.nvim",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.which-key"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- Add bindings which show up as group name
-  --     local wk = require "which-key"
-  --     wk.register({
-  --       b = { name = "Buffer" },
-  --     }, { mode = "n", prefix = "<leader>" })
-  --   end,
-  -- },
+  {
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+      -- opts.windows = {
+      --   margin = { 0, 0.5, 1, 0.7 },
+      --   -- padding = { 1, 0, 0, 300},
+      --   winblend = 80,
+      -- }
+      -- opts.layout = {
+      --   height = { min = 20, max = 20 },
+      --   width = { max = 20 },
+      --   spacing = 4,
+      --   align = "right",
+      -- }
+      return opts
+    end,
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    config = function(plugin, opts)
+      require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+    end,
+  },
 }
