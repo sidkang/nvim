@@ -1,7 +1,0 @@
-{
-  "sample01": {
-    "prefix": "tet",
-    "body": ["abc"],
-    "description": "a gloabal test marco"
-  }
-}

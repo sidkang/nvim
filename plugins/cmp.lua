@@ -26,7 +26,7 @@ return {
           {
             name = "beancount",
             option = {
-              account = "/Users/sid/Developer/ledger/ledger.bean",
+              account = vim.fn.expand "$HOME/Developer/ledger/ledger.bean",
             },
           },
         },

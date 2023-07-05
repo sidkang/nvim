@@ -1,68 +1,12 @@
+local utils = require "astronvim.utils"
+
 return {
-  -- customize alpha options
+  "AstroNvim/astrocommunity",
+
   {
     "goolord/alpha-nvim",
     enabled = false,
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        " █████  ███████ ████████ ██████   ██████",
-        "██   ██ ██         ██    ██   ██ ██    ██",
-        "███████ ███████    ██    ██████  ██    ██",
-        "██   ██      ██    ██    ██   ██ ██    ██",
-        "██   ██ ███████    ██    ██   ██  ██████",
-        " ",
-        "    ███    ██ ██    ██ ██ ███    ███",
-        "    ████   ██ ██    ██ ██ ████  ████",
-        "    ██ ██  ██ ██    ██ ██ ██ ████ ██",
-        "    ██  ██ ██  ██  ██  ██ ██  ██  ██",
-        "    ██   ████   ████   ██ ██      ██",
-      }
-      return opts
-    end,
   },
-  -- You can disable default plugins as follows:
-  -- { "max397574/better-escape.nvim", enabled = false },
-  --
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom luasnip configuration such as filetype extend or custom snippets
-  --     local luasnip = require "luasnip"
-  --     luasnip.filetype_extend("javascript", { "javascriptreact" })
-  --   end,
-  -- },
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   config = function(plugin, opts)
-  --     require "plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
-  --     -- add more custom autopairs configuration such as custom rules
-  --     local npairs = require "nvim-autopairs"
-  --     local Rule = require "nvim-autopairs.rule"
-  --     local cond = require "nvim-autopairs.conds"
-  --     npairs.add_rules(
-  --       {
-  --         Rule("$", "$", { "tex", "latex" })
-  --           -- don't add a pair if the next character is %
-  --           :with_pair(cond.not_after_regex "%%")
-  --           -- don't add a pair if  the previous character is xxx
-  --           :with_pair(
-  --             cond.not_before_regex("xxx", 3)
-  --           )
-  --           -- don't move right when repeat character
-  --           :with_move(cond.none())
-  --           -- don't delete if the next character is xx
-  --           :with_del(cond.not_after_regex "xx")
-  --           -- disable adding a newline when you press <cr>
-  --           :with_cr(cond.none()),
-  --       },
-  --       -- disable for .vim files, but it work for another filetypes
-  --       Rule("a", "a", "-vim")
-  --     )
-  --   end,
-  -- },
   {
     "Comment.nvim",
     config = function()
@@ -70,29 +14,44 @@ return {
       require("Comment.ft").set("beancount", ";%s")
     end,
   },
-  -- By adding to the which-key config and using our helper function you can add more which-key registered bindings
-  {
-    "folke/which-key.nvim",
-    opts = function(_, opts)
-      -- opts.windows = {
-      --   margin = { 0, 0.5, 1, 0.7 },
-      --   -- padding = { 1, 0, 0, 300},
-      --   winblend = 80,
-      -- }
-      -- opts.layout = {
-      --   height = { min = 20, max = 20 },
-      --   width = { max = 20 },
-      --   spacing = 4,
-      --   align = "right",
-      -- }
-      return opts
-    end,
-  },
   {
     "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
       require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
       require("luasnip.loaders.from_vscode").lazy_load { paths = { "./lua/user/snippets" } } -- load snippets paths
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = function(_, opts)
+      -- add more things to the ensure_installed table protecting against community packs modifying it
+      opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
+        -- "lua"
+        "beancount",
+      })
+    end,
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, config)
+      -- config variable is the default configuration table for the setup function call
+      local null_ls = require "null-ls"
+
+      -- Check supported formatters and linters
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+      config.sources = {
+        -- Set a formatter
+        null_ls.builtins.formatting.stylua,
+        -- null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.bean_format.with {
+          extra_args = { "-c", "70" },
+        },
+      }
+
+      return config -- return final config table
     end,
   },
 }
