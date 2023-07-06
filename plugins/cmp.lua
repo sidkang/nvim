@@ -23,11 +23,13 @@ return {
 
       cmp.setup.filetype("beancount", {
         sources = cmp.config.sources {
+          { name = "luasnip", priority = 750 },
           {
             name = "beancount",
             option = {
               account = vim.fn.expand "$HOME/Developer/ledger/ledger.bean",
             },
+            priority = 500
           },
         },
       })

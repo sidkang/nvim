@@ -1,3 +1,9 @@
 return {
-    { import = "astrocommunity.pack.rust" },
+	{ import = "astrocommunity.pack.rust" },
+	{
+		"rust-tools.nvim",
+		opts = function(_, opts)
+			return opts
+		end,
+	},
 }
