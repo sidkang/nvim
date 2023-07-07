@@ -1,10 +1,13 @@
 return {
-  settings = {
-    ["rust-analyzer"] = {
-      -- standalone = true,
-      checkOnSave = {
-        command = "clippy"
-      }
-    },
-  },
+	settings = {
+		["rust-analyzer"] = {
+			lens = {
+				enable = false,
+			},
+			-- standalone = true,
+			checkOnSave = {
+				command = "clippy",
+			},
+		},
+	},
 }

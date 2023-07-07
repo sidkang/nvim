@@ -34,6 +34,9 @@ return {
 		-- move lines
 		["<A-j>"] = { ":m .+1<CR>==" },
 		["<A-k>"] = { ":m .-2<CR>==" },
+
+		-- Toggle Term
+		["<C-\\>"] = { "<Cmd>ToggleTerm<Cr>", desc = "Toggle terminal" },
 	},
 	i = {
 		["<A-j>"] = { "<Esc>:m .+1<CR>==gi" },
@@ -46,5 +49,10 @@ return {
 	t = {
 		-- setting a mapping to false will disable it
 		-- ["<esc>"] = false,
+		["<C-\\>"] = { "<Cmd>ToggleTerm<Cr>", desc = "Toggle terminal" },
+		["<C-h>"] = { "<Left>" },
+		["<C-j>"] = { "<Down>" },
+		["<C-k>"] = { "<Up>" },
+		["<C-l>"] = { "<Right>" },
 	},
 }
