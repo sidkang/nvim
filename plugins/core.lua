@@ -7,6 +7,13 @@ return {
 		"goolord/alpha-nvim",
 		enabled = false,
 	},
+	-- {
+	-- 	"nvim-notify",
+	-- 	opts = function(_, opts)
+	-- 		opts.background = "#000000"
+	-- 		return opts
+	-- 	end,
+	-- },
 	{
 		"telescope.nvim",
 		opts = function(_, opts)
