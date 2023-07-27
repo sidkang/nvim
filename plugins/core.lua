@@ -15,6 +15,19 @@ return {
 	-- 	end,
 	-- },
 	{
+		"nvim-autopairs",
+		-- dependencies = {
+		-- "windwp/nvim-ts-autotag",
+		-- },
+		opts = function(_, opts)
+			-- opts.fast_wrap.chars = utils.list_insert_unique(opts.fast_wrap.chars, {
+			-- 	"<",
+			-- })
+			-- opts.fast_wrap.chars = { "{", "[", "(", '"', "'", "<" }
+			return opts
+		end,
+	},
+	{
 		"telescope.nvim",
 		opts = function(_, opts)
 			if opts.pickers == nil then
@@ -40,7 +53,7 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		config = function(plugin, opts)
-			require("plugins.configs.luasnip")(plugin, opts) -- include the default astronvim config that calls the setup call
+			require("plugins.configs.luasnip")(plugin, opts)                                     -- include the default astronvim config that calls the setup call
 			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./lua/user/snippets" } }) -- load snippets paths
 		end,
 	},
@@ -53,32 +66,6 @@ return {
 				-- "lua"
 				"beancount",
 			})
-		end,
-	},
-
-	{
-		"jose-elias-alvarez/null-ls.nvim",
-		opts = function(_, config)
-			-- config variable is the default configuration table for the setup function call
-			local null_ls = require("null-ls")
-
-			-- Check supported formatters and linters
-			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-			-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-			config.sources = {
-				-- Set a formatter
-
-				null_ls.builtins.formatting.stylua,
-				-- null_ls.builtins.formatting.stylua.with({
-				-- 	extra_args = { "--indent_width", "2" },
-				-- }),
-				-- null_ls.builtins.formatting.prettier,
-				null_ls.builtins.formatting.bean_format.with({
-					extra_args = { "-c", "70" },
-				}),
-			}
-
-			return config -- return final config table
 		end,
 	},
 }

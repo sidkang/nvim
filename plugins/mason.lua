@@ -1,4 +1,24 @@
 return {
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      -- config variable is the default configuration table for the setup function call
+      local null_ls = require("null-ls")
+
+      -- Check supported formatters and linters
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+      opts.sources = {
+        null_ls.builtins.formatting.stylua,
+        -- for beancount
+        null_ls.builtins.formatting.bean_format.with({
+          extra_args = { "-c", "70" },
+        }),
+      }
+
+      return opts -- return final config table
+    end,
+  },
   -- use mason-null-ls to configure Formatters/Linter installation for null-ls sources
   {
     "jay-babu/mason-null-ls.nvim",

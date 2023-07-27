@@ -16,9 +16,12 @@ return {
 		lazy = false,
 		config = function()
 			require("everforest").setup({
-				background = "hard", -- soft, medium, hard
+				background = "soft", -- soft, medium, hard
 				italics = true,
 				transparent_background_level = 10,
+				on_highlights = function(hl, palette)
+					hl.Cursor = { fg = palette.yellow, bg = palette.purple, sp = palette.red }
+				end,
 			})
 		end,
 	},

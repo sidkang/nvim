@@ -27,8 +27,8 @@ return {
 		["<leader>rm"] = { "<Cmd>RustExpandMacro<CR>" },
 
 		["<leader>fB"] = {
-			"<Cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<CR>",
-			name = "Search current buffer",
+			"<cmd>Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>",
+			-- name = "Search current buffer",
 		},
 
 		-- move lines
@@ -45,6 +45,9 @@ return {
 	v = {
 		["<A-j>"] = { ":m '>+1<CR>gv=gv" },
 		["<A-k>"] = { ":m '<-2<CR>gv=gv" },
+
+		-- EasyAlign
+		["ga"] = { ":EasyAlign<CR>" },
 	},
 	t = {
 		-- setting a mapping to false will disable it
@@ -54,5 +57,9 @@ return {
 		["<C-j>"] = { "<Down>" },
 		["<C-k>"] = { "<Up>" },
 		["<C-l>"] = { "<Right>" },
+	},
+	x = {
+		-- EasyAlign
+		["ga"] = { ":EasyAlign<CR>" },
 	},
 }
