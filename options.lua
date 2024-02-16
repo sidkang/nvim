@@ -25,7 +25,7 @@ return {
 		ui_notifications_enabled = true, -- disable notifications when toggling UI elements
 		resession_enabled = false,     -- enable experimental resession.nvim session management (will be default in AstroNvim v4)
 
-		python3_host_prog = vim.fn.expand("$PYENV_ROOT/versions/3.10.12/envs/py-service/bin/python3"),
+		python3_host_prog = vim.fn.expand("$PYENV_ROOT/versions/3.10.13/envs/py-service/bin/python"),
 	},
 }
 -- If you need more control, you can use the function()...end notation
