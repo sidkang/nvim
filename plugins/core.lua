@@ -26,6 +26,14 @@ return {
 			-- opts.fast_wrap.chars = { "{", "[", "(", '"', "'", "<" }
 			return opts
 		end,
+		config = function(plugin, opts)
+			require("plugins.configs.nvim-autopairs")(plugin, opts)
+			local Rule = require("nvim-autopairs.rule")
+			local npairs = require("nvim-autopairs")
+
+			npairs.add_rule(Rule("```", "```", "quarto"))
+			npairs.add_rule(Rule("```.*$", "```", "quarto"):only_cr():use_regex(true))
+		end,
 	},
 	{
 		"telescope.nvim",
@@ -53,7 +61,7 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		config = function(plugin, opts)
-			require("plugins.configs.luasnip")(plugin, opts)                                     -- include the default astronvim config that calls the setup call
+			require("plugins.configs.luasnip")(plugin, opts) -- include the default astronvim config that calls the setup call
 			require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./lua/user/snippets" } }) -- load snippets paths
 		end,
 	},
